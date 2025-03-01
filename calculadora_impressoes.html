@@ -50,10 +50,24 @@
             <button onclick="calcularCusto()">Calcular Custo</button>
         </div>
         <p id="resultado">Custo Final: -</p>
+
+        <div id="vendaSection" class="hidden">
+            <input type="number" id="valorVenda" placeholder="Valor de venda pretendido">
+            <button onclick="prosseguirVenda()">Seguinte</button>
+        </div>
+
+        <div id="tipoVendaSection" class="hidden">
+            <button onclick="calcularLucro('shoppe')">Shoppe</button>
+            <button onclick="calcularLucro('loja')">Loja</button>
+        </div>
+        <p id="resultadoVenda">Lucro Final: -</p>
+
+        <button onclick="location.href='index.html'">Voltar para a Página Inicial</button>
     </div>
 
     <script>
         let materialSelecionado = '';
+        let custoFinal = 0;
         const precos = { ABS: 60, PETG: 90, PLA: 100 };
         const custoTempo = 0.02166;
 
@@ -73,9 +87,31 @@
             
             let custoMaterial = (precos[materialSelecionado] / 1000) * peso;
             let custoTempoTotal = tempo * custoTempo;
-            let custoFinal = custoMaterial + custoTempoTotal;
+            custoFinal = custoMaterial + custoTempoTotal;
             
             document.getElementById('resultado').textContent = `Custo Final: R$ ${custoFinal.toFixed(2)}`;
+            document.getElementById('vendaSection').classList.remove('hidden');
+        }
+
+        function prosseguirVenda() {
+            document.getElementById('tipoVendaSection').classList.remove('hidden');
+        }
+
+        function calcularLucro(tipo) {
+            let valorVenda = parseFloat(document.getElementById('valorVenda').value);
+            if (isNaN(valorVenda)) {
+                alert("Por favor, insira um valor válido de venda.");
+                return;
+            }
+
+            let lucroFinal = 0;
+            if (tipo === 'shoppe') {
+                lucroFinal = valorVenda * 0.8 - 4 - custoFinal;
+            } else if (tipo === 'loja') {
+                lucroFinal = valorVenda * 0.9 - custoFinal;
+            }
+            
+            document.getElementById('resultadoVenda').textContent = `Lucro Final: R$ ${lucroFinal.toFixed(2)}`;
         }
     </script>
 </body>
