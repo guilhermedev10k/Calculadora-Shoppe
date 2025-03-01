@@ -3,36 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Desconto</title>
+    <title>Página Inicial</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
         }
-        input, button {
-            margin: 10px;
-            padding: 10px;
-            font-size: 16px;
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <h2>Calculadora comissão de venda Shoppe</h2>
-    <input type="number" id="valor" placeholder="Digite um valor">
-    <button onclick="calcular()">Calcular</button>
-    <p>Resultado: <span id="resultado">-</span></p>
-
-    <script>
-        function calcular() {
-            let valor = parseFloat(document.getElementById('valor').value);
-            if (isNaN(valor)) {
-                alert("Por favor, insira um número válido.");
-                return;
-            }
-            let resultado = valor * 0.8 - 4;
-            document.getElementById('resultado').textContent = resultado.toFixed(2);
-        }
-    </script>
+    <h2>Bem-vindo à Página Inicial</h2>
+    <div class="container">
+        <button onclick="location.href='calculadora_shoppe.html'">Calculadora Shoppe</button>
+        <button onclick="location.href='calculadora_impressoes.html'">Calculadora de Impressões</button>
+    </div>
 </body>
 </html>
