@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Custos por Impressão</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Calculadora de Custos por Impressão</h2>
+    <div class="container">
+        <label>Escolha o material:</label>
+        <button onclick="selecionarMaterial('ABS')">ABS</button>
+        <button onclick="selecionarMaterial('PETG')">PETG</button>
+        <button onclick="selecionarMaterial('PLA')">PLA</button>
+
+        <div id="inputs" class="hidden">
+            <input type="number" id="peso" placeholder="Peso da impressão (g)">
+            <input type="number" id="tempo" placeholder="Tempo de impressão (min)">
+            <button onclick="calcularCusto()">Calcular Custo</button>
+        </div>
+        <p id="resultado">Custo Final: -</p>
+    </div>
+
+    <script>
+        let materialSelecionado = '';
+        const precos = { ABS: 60, PETG: 90, PLA: 100 };
+        const custoTempo = 0.02166;
+
+        function selecionarMaterial(material) {
+            materialSelecionado = material;
+            document.getElementById('inputs').classList.remove('hidden');
+        }
+
+        function calcularCusto() {
+            let peso = parseFloat(document.getElementById('peso').value);
+            let tempo = parseFloat(document.getElementById('tempo').value);
+            
+            if (isNaN(peso) || isNaN(tempo)) {
+                alert("Por favor, insira valores válidos para peso e tempo.");
+                return;
+            }
+            
+            let custoMaterial = (precos[materialSelecionado] / 1000) * peso;
+            let custoTempoTotal = tempo * custoTempo;
+            let custoFinal = custoMaterial + custoTempoTotal;
+            
+            document.getElementById('resultado').textContent = `Custo Final: R$ ${custoFinal.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
