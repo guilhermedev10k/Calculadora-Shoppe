@@ -15,13 +15,25 @@
             padding: 10px;
             font-size: 16px;
         }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <h2>Calculadora comissão shoppe</h2>
+    <h2>Calculadora comissão Shoppe</h2>
     <input type="number" id="valor" placeholder="Digite um valor">
     <button onclick="calcular()">Calcular</button>
     <p>Resultado: <span id="resultado">-</span></p>
+
+    <button onclick="location.href='index.html'">Voltar para a Página Inicial</button>
 
     <script>
         function calcular() {
